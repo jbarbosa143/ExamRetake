@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Success!</title>
+    <style>
+        .container{
+            width:850px;
+        }
+        .unfavored{
+            margin-left: 10px;
+            width:300px;
+            border: 2px solid black;
+        }
+        .liked{
+            margin-left: 10px;
+            vertical-align: right;
+            width:300px;
+            border: 2px solid black;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>SUCCESS!!!!!! Welcome,{{loggedinuser.email_address}}</h1>
+        <a href="/logout"><button>Logout</button></a>
+        <!-- {{userinfo}} -->
+        <div class="notfavored">
+            <p>Quotable Quotes</p>
+            {% for quotes in notfavored %}
+                <div class="unfavored">
+                {% if loggedinuser == quotes.added_by %}
+                <a href="/edit/{{quotes.id}}">Edit</a></td> |
+                <a href="/delete/{{quotes.id}}">Delete</a></td>
+                {% endif %}
+                    <p>{{quotes.quoter}}: {{quotes.quote}}</p>
+                    <p>Posted by :<a href="/users/{{quotes.added_by.id}}">{{quotes.added_by.email_address}}</a> </p>
+                    <a href="/add/{{quotes.id}}"> <button>Add to Favorites</button></a>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="favored">
+            <p>Your Favorites</p>
+            {% for quote in likedquotes %}
+                <div class="liked">
+                    <p>{{quote.quoter}}: {{quote.quote}}</p>
+                    <p>Posted by :<a href="/users/{{quote.added_by.id}}">{{quote.added_by.email_address}}</a> </p>
+                    <a href="/remove/{{quote.id}}"> <button>Remove from Favorites</button></a>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="newquote">
+            <p>Contribute a Quote</p>
+            {% if messages %}
+            <ul>
+                {% for message in messages %}
+                <li style="color: red;">{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            <form action="/create" method="post">
+                {% csrf_token %}
+                <p>Quoted By:<input type="text" name="quotedby" id=""></p>
+                <p>Message:<input type="text" name="message" id=""></p>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

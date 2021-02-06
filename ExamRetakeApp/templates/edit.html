@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Quote</title>
+</head>
+<body>
+    <div class="left">
+        <h1>Edit Quote</h1>
+        <a href="/success"><button>Home</button></a><a href="/logout"><button>Logout</button></a>
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                <li style="color: red;">{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        <form action="/update/{{editquote.id}}" method="post">
+            {% csrf_token %}
+            <p>Quoted By:<input type="text" name="quotedby" id=""></p>
+            <p>Message:<input type="text" name="message" id=""></p>
+            <input type="submit" value="Submit">
+        </form>
+</body>
+</html>

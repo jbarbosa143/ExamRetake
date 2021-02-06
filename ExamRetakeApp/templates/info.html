@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Web Page</title>
+</head>
+<body>
+    <div class="container">
+        <h1>{{iw.item_list}}</h1>
+        <a href="/success"><button>Dashboard</button></a  ><a href="/logout"><button>Logout</button></a>
+            <p>Posts By:{{loggedinuser.email_address}} </p>
+            <!-- {{userquotes}} -->
+            <p>{{totalquotescount}}</p>
+            <p>{{userquotes.count}}</p>
+            <ul>
+                {% for u in userquotes %}
+                    <li>{{u.quote}}
+                    </li>
+                {% endfor %}
+            </ul>
+    </div>
+</body>
+</html>

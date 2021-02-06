@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+</head>
+<body>
+    <div class="containter">
+        <div class="reg">
+            <h1>Registration</h1>
+            {% if messages %}
+            <ul>
+                {% for message in messages %}
+                <li style="color: red;">{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            <form action="/register" method="post">
+                {% csrf_token %}
+                <p>Email: <input type="text" name="email" id=""></p>
+                <p>Password: <input type="text" name="pw" id=""></p>
+                <p>Confirm Pass: <input type="text" name="cpw" id=""></p>
+                <p><input type="submit" name='Register Now'></p>
+            </form>
+        </div>
+        <div class="log">
+            <h1>Login Here</h1>
+            <form action="/login" method="post">
+                {% csrf_token %}
+                <p>Email: <input type="text" name="email" id=""></p>
+                <p>Password: <input type="text" name="pw" id=""></p>
+                
+                <p><input type="submit" name='Login'></p>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
